@@ -100,14 +100,16 @@ public class myList <T> {
         getGenericArray()[getCapacity() - 1] = null;
         return true;
     }
-    public void set(int index, T element){
+
+    public void set(int index, T element) {
         //If index not empty
-        if(getGenericArray()[index] != null){
+        if (getGenericArray()[index] != null) {
             //set
             getGenericArray()[index] = element;
 
         }
     }
+
     public String toString() {
         if (getGenericArray() == null || getCapacity() == 0) {
             return "[]";
@@ -122,7 +124,85 @@ public class myList <T> {
         return sb.toString();
     }
 
+    public int indexOf(T element){
+        int index = -1;
+        for(T i : getGenericArray()){
+            index++;
+            if(i == element){
+                return index;
+            }
+        }
+        return -1;
     }
+
+    public int lastIndexOf(T element){
+        int index = -1;
+        int lastIndex = -1;
+        for(T i : getGenericArray()){
+            index++;
+            if(i == element){
+                lastIndex = index;
+            }
+        }
+        return lastIndex;
+    }
+  public boolean isEmpty(){
+        boolean  isEmpty = true;
+        for( T element : getGenericArray()){
+            if (element != null){
+                isEmpty = false;
+                break;
+
+            }
+
+        }return false;
+  }
+    public T[] toArray(){
+        T[] newArray = (T[]) new Object[size()];
+        for(int i = 0; i < size(); i++){
+            newArray[i] = getGenericArray()[i];
+        }
+        return newArray;
+    }
+    public void clear(){
+        for(int i = 0; i < size(); i++){
+            getGenericArray()[i] = null;
+        }
+    }
+    public myList<T> subList(int start, int finish){
+
+        if(start>=0 && finish>=0){
+            if(start<=this.getCapacity() && finish<=this.getCapacity()){
+                int size = finish - start + 1;
+
+                myList<T> myList = new myList<>(size);
+                for(int i = start; i <= finish; i++){
+                    myList.add((T) get(i));
+                }
+                return myList;
+            }
+
+        }return null;
+
+    }
+    public boolean contains(T data){
+        boolean isContains = false;
+        for (int i = 0; i < size(); i++){
+            if(getGenericArray()[i] != null && getGenericArray()[i].equals(data)){
+                isContains = true;
+            }
+        }
+        return isContains;
+    }
+
+}
+
+
+
+
+
+
+
 
 
 
